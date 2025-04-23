@@ -14,7 +14,7 @@ function setcookie(string $name, string $value){
 class SessionService
 {
 
-    public static string $COOKIE_NAME = "X-sSALMA-SESSION";
+    public static string $COOKIE_NAME = "X-SALMA-SESSION:";
 
     private SessionRepository $sessionRepository;
     private UserRepository $userRepository;
@@ -43,7 +43,7 @@ class SessionService
         $sessionId = $_COOKIE[self::$COOKIE_NAME] ?? '';
         $this->sessionRepository->deleteById($sessionId);
 
-        setcookie(self::$COOKIE_NAME, '', 1, "/");
+        setcookie(self::$COOKIE_NAME, '', 1 , "/");
     }
 
     public function current(): ?User
