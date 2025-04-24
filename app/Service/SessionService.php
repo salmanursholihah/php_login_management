@@ -30,13 +30,19 @@ class SessionService
         $session = new Session();
         $session->id = uniqid();
         $session->userId = $userId;
-
+    
         $this->sessionRepository->save($session);
-
-        setcookie(self::$COOKIE_NAME, $session->id, time() + (60 * 60 * 24 * 30), "/");
-
+    
+        $this->setSessionCookie($session->id);
+    
         return $session;
     }
+    
+    private function setSessionCookie(string $sessionId): void
+    {
+        setcookie(self::$COOKIE_NAME, $sessionId, time() + (60 * 60 * 24 * 30), "/");
+    }
+    
 
     public function destroy()
     {
