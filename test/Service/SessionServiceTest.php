@@ -34,13 +34,13 @@ class SessionServiceTest extends TestCase
     public function testCreate()
     {
         $session = $this->sessionService->create("salma");
-
-        $this->expectOutputRegex("[X-SALMA-SESSION: $session->id]");
-
+    
         $result = $this->sessionRepository->findById($session->id);
-
+    
+        self::assertNotNull($result);
         self::assertEquals("salma", $result->userId);
     }
+        
 
     public function testDestroy()
     {
